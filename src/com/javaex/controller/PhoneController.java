@@ -94,6 +94,17 @@ public class PhoneController extends HttpServlet {
 			pDao.dbDle(pId);
 
 			WebUtil.redirect(request, response, "/phonebook2/pbc?action=list");
+		} else {
+			System.out.println("리스트 출력");
+			// 리스트 출력
+			PhoneDao pDao = new PhoneDao();
+			List<PersonVo> pList = pDao.dbList();
+
+			// 리스트 데이터를 jsp에 전달
+			request.setAttribute("PersonList", pList);
+
+			// html >> jsp코딩이 유리 >> jsp forword
+			WebUtil.forword(request, response, "./WEB-INF/list.jsp");
 		}
 
 	}
